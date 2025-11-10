@@ -43,6 +43,18 @@ func createTaskHandler(c *gin.Context) {
 	c.JSON(http.StatusCreated, newTask)
 }
 
+func getTasksHandler(c *gin.Context) {
+	tasksLock.Lock()
+	defer tasksLock.Unlock()
+	var taskList []Task
+
+	for _, task := range tasks {
+		taskList = append(taskList, task)
+	}
+
+	c.JSON(http.StatusOK, taskList)
+}
+
 func main() {
 
 	server := gin.Default()
@@ -56,6 +68,7 @@ func main() {
 	api := server.Group("/tasks")
 	{
 		api.POST("", createTaskHandler)
+		api.GET("", getTasksHandler)
 	}
 
 	server.Run(":8000")
