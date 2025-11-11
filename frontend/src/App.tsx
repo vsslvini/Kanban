@@ -201,16 +201,20 @@ function App() {
 
   if (loading) {
     return (
-      <div className="loading-state">
-        <p>Carregando tarefas...</p>
+      <div className="center-wrapper">
+        <div className="loading-state">
+          <p>Carregando tarefas...</p>
+        </div>
       </div>
     );
   }
   if (error) {
     return (
-      <div className="error-state">
-        <p>{error}</p>
-        <button onClick={fetchTasks}>Tentar Novamente</button>
+      <div className="center-wrapper">
+        <div className="error-state">
+          <p>{error}</p>
+          <button onClick={fetchTasks}>Tentar Novamente</button>
+        </div>
       </div>
     );
   }
@@ -224,15 +228,14 @@ function App() {
       <div className="app">
         <header className="app-header">
           <h1>Meu Kanban</h1>
-          {/* [!code ++] Container para os botões do cabeçalho */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <ThemeSwitcher /> {/* [!code ++] Botão de tema adicionado */}
+            <ThemeSwitcher />
             <button
               className="add-task-button"
               onClick={openAddTaskModal}
             >
-              <span>+</span> {/* [!code ++] Ícone de + separado */}
-              <span>Adicionar Tarefa</span> {/* [!code ++] Texto do botão */}
+              <span>+</span>
+              <span>Adicionar Tarefa</span>
             </button>
           </div>
         </header>
