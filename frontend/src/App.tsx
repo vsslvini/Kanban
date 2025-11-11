@@ -15,6 +15,8 @@ import {
 import type { DragEndEvent, DragStartEvent } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { TaskModal } from "./components/TaskModal/TaskModal";
+// [!code ++] Importa o novo componente de tema
+import { ThemeSwitcher } from "./components/ThemeSwitcher/ThemeSwitcher";
 
 const columns = TASK_STATUSES;
 type TaskPayload = Omit<Task, 'id'>;
@@ -41,7 +43,7 @@ function App() {
     try {
       setLoading(true);
       const response = await api.get<Task[]>("/tasks");
-      setTasks(response.data);
+      setTasks(response.data || []);
       setError(null);
     } catch (err) {
       console.error("Erro ao buscar tarefas", err);
@@ -222,12 +224,17 @@ function App() {
       <div className="app">
         <header className="app-header">
           <h1>Meu Kanban</h1>
-          <button
-            className="add-task-button"
-            onClick={openAddTaskModal}
-          >
-            + Adicionar Tarefa
-          </button>
+          {/* [!code ++] Container para os botões do cabeçalho */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <ThemeSwitcher /> {/* [!code ++] Botão de tema adicionado */}
+            <button
+              className="add-task-button"
+              onClick={openAddTaskModal}
+            >
+              <span>+</span> {/* [!code ++] Ícone de + separado */}
+              <span>Adicionar Tarefa</span> {/* [!code ++] Texto do botão */}
+            </button>
+          </div>
         </header>
         <main className="kanban-board">
           <KanbanColumn

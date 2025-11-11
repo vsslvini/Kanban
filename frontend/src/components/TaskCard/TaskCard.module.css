@@ -1,17 +1,17 @@
 .card {
-    background-color: #ffffff;
+    background-color: var(--color-surface);
     border-radius: 8px;
     padding: 1rem 1.25rem;
     margin-bottom: 1rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e5e7eb;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
     transition: box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
     cursor: grab;
 }
 
 .cardDragging {
     opacity: 0.5;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-lg);
     cursor: grabbing;
 }
 
@@ -19,13 +19,13 @@
 .title {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--color-text-primary);
     margin-bottom: 0.5rem;
 }
 
 .description {
     font-size: 0.9rem;
-    color: #4b5563;
+    color: var(--color-text-secondary);
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
@@ -36,12 +36,12 @@
 
 .card:hover {
     transform: translateY(-2px);
-    border-color: #a5b4fc;
-    box-shadow: 0 0 12px 4px rgba(79, 70, 229, 0.25);
+    border-color: var(--color-primary);
+    box-shadow: var(--glow-effect);
 }
 
 .cardDragging:hover {
     transform: translateY(0);
-    border-color: #e5e7eb;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-lg);
 }
