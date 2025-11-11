@@ -85,7 +85,7 @@ git clone https://github.com/vsslvini/desafio-fullstack-veritas.git
 cd desafio-fullstack-veritas/backend/cmd
 ```
 
-### cd desafio-fullstack-veritas/backend/cmd
+### Instale as dependências (gin, cors, etc.)
 
 ```
 go mod tidy
