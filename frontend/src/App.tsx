@@ -227,7 +227,7 @@ function App() {
     >
       <div className="app">
         <header className="app-header">
-          <h1>Meu Kanban</h1>
+          <h1>Mini Kanban de Tarefas</h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <ThemeSwitcher />
             <button
