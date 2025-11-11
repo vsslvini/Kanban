@@ -9,13 +9,10 @@
     transition: background-color 0.2s ease;
 }
 
-/* --- NOVO ESTILO DND --- */
 .columnOver {
     background-color: #e0e7ff;
-    /* Um brilho azul/indigo */
 }
 
-/* --------------------- */
 
 
 .title {

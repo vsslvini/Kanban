@@ -14,6 +14,7 @@ import {
 } from "@dnd-kit/core";
 import type { DragEndEvent, DragStartEvent } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
+import { TaskModal } from "./components/TaskModal/TaskModal";
 
 const columns = TASK_STATUSES;
 
@@ -22,6 +23,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -47,6 +49,20 @@ function App() {
     };
     fetchTasks();
   }, []);
+
+  const handleAddTask = async (taskData: {
+    titulo: string;
+    descricao?: string;
+    status: Task["status"];
+  }) => {
+    try {
+      const response = await api.post<Task>("/tasks", taskData);
+      setTasks((prevTasks) => [...prevTasks, response.data]);
+    } catch (err) {
+      console.error("Falha ao criar tarefa", err);
+      throw new Error("Falha na API ao criar tarefa.");
+    }
+  };
 
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
@@ -94,7 +110,7 @@ function App() {
           });
         }
       }
-      return; 
+      return;
     }
 
     setTasks((prevTasks) => {
@@ -162,6 +178,10 @@ function App() {
       <div className="app">
         <header className="app-header">
           <h1>Meu Kanban</h1>
+          <button
+            className="add-task-button"
+            onClick={() => setIsModalOpen(true)}
+          ></button>
         </header>
         <main className="kanban-board">
           <KanbanColumn
@@ -182,6 +202,11 @@ function App() {
       <DragOverlay>
         {activeTask ? <TaskCard task={activeTask} /> : null}
       </DragOverlay>
+      <TaskModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAddTask={handleAddTask}
+      />
     </DndContext>
   );
 }
